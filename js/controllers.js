@@ -8,18 +8,19 @@
   app.controller('CameraControl', function($rootScope) {
     this.cameras = camerasArray;
     $rootScope.shoppingCart = [];
-    $rootScope.shoppingCartprices = [];
-    let shoppingCart = $rootScope.shoppingCart;
-    let shoppingCartPrices = $rootScope.shoppingCartPrices;
-
 
     this.addToCart = function(cam) {
-      shoppingCart.push(cam)
-      shoppingCartPrices = shoppingCart.map((e) => { return e.price });
-      $rootScope.shoppingCartSubTotal = shoppingCartPrices.reduce((current, previous) => {
+      $rootScope.shoppingCart.push(cam)
+
+      $rootScope.shoppingCartPrices =
+      $rootScope.shoppingCart.map((e) => { return e.price });
+
+      $rootScope.shoppingCartSubTotal = $rootScope.shoppingCartPrices.reduce((current, previous) => {
         return current + previous
       });
+
       $rootScope.shoppingCartTax = $rootScope.shoppingCartSubTotal * .0877899;
+
       $rootScope.shoppingCartTotal = $rootScope.shoppingCartSubTotal + $rootScope.shoppingCartTax;
     };
   })
